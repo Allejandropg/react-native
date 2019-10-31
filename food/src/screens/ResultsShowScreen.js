@@ -21,7 +21,6 @@ const ResultsShowScreen = ({ navigation }) => {
     if(!result){
         return null;
     }else{
-        
         console.log(result)
     }
     return ( 

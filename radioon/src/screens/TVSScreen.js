@@ -1,0 +1,63 @@
+import React from 'react';
+import { View, Text, FlatList, StyleSheet, Dimensions } from 'react-native';
+import tvsSearch from '../hooks/tvsSearch';
+import ListItem from '../components/Listitem';
+import Slide from '../components/Slide';
+import { Spinner } from '../components/common';
+
+const { width, height } = Dimensions.get('window');
+const auxHeight = width - width * 0.1;
+
+const radioPress = (radio) => {
+  console.log('radioClick',radio);
+}
+
+const slides = [
+  {
+    imageSrc: require('../../tmp/slide/bg-index.jpg'),
+    imageWidth: width,
+    imageHeight: (height/2),
+    title: 'Hello World',
+    subtitle: 'This is a beautiful world',
+    titleColor: '#fff',
+    subtitleColor: '#fff',
+  }
+];
+/**
+ * TODO FAZER PESQUISA
+ * SearchApi: função que retorna padrão ou com parametro de pesquisa
+ * Tvs que foram encotradas
+ * Mensagem de erro
+ */
+const TvsScreen = () => {
+    const { searchApi, tvs, errorMessage } = tvsSearch();
+    return (
+      <View style={{backgroundColor:"#f0eff4"}}>
+        <Slide slides={slides}/>
+        <Text style={styles.text}>Rádios em Destaques</Text>
+        { errorMessage ? <Text style={{textAlign:"center"}}>{errorMessage}</Text> : null }
+        {tvs.length < 1?<Spinner/>: <FlatList  
+          data={ tvs } 
+          keyExtractor= { (radio) =>  radio.codRadio }  
+          renderItem = { ({ item }) =>  <ListItem radio={ item } onPress={() => { radioPress(item) }}/>  }
+          contentContainerStyle={styles.direction} 
+          numColumns={3} />  }
+      </View>
+    );
+};
+
+const styles = StyleSheet.create({
+	direction:{
+		alignItems:"center",
+		justifyContent: 'center',
+		padding: 10,
+		marginBottom: 40
+	},
+  text: {
+    fontSize:18,
+    marginTop: height/3,
+    textAlign:"center"
+  }
+});
+
+export default TvsScreen;

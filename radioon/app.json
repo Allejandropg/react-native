@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Radion ON TV",
+    "name": "Radio On TV",
     "slug": "radioon",
     "privacy": "public",
     "sdkVersion": "35.0.0",
@@ -25,6 +25,9 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
-  }
+    },
+    "entryPoint": "node_modules/expo/AppEntry.js"
+  },
+  "displayName": "yes",
+  "name": "yes"
 }
